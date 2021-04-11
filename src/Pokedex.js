@@ -1,9 +1,12 @@
 import React from 'react'
+import MyAppBar from './MyAppBar'
+import Items from './Items'
 
 const Pokedex = () => {
     return (
         <div>
-            Pokedex Page
+            <MyAppBar />
+            <Items />
         </div>
     )
 }
