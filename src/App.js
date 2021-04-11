@@ -1,10 +1,23 @@
 import 'fontsource-roboto';
+import { Route, Switch } from 'react-router-dom'
+import Pokedex from './Pokedex'
+import Pokemon from './Pokemon'
 
 function App() {
   return (
-    <div className="App">
-      <h1>test</h1>
-    </div>
+    <Switch>
+      <div className="App">
+        <Route
+          exact path='/'
+          render={(props) => <Pokedex {...props} />}
+        />
+
+        <Route
+          exact path='/:pokemonId'
+          render={(props) => <Pokemon {...props} />}
+        />
+      </div>
+    </Switch>
   );
 }
 
