@@ -8,10 +8,13 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardActionArea from '@material-ui/core/CardActionArea';
 
 const useStyles = makeStyles({
     root: {
       minWidth: 275,
+      textAlign: 'center'
     },
     bullet: {
       display: 'inline-block',
@@ -24,40 +27,63 @@ const useStyles = makeStyles({
     pos: {
       marginBottom: 12,
     },
+    media: {
+      height: 100,
+      width: 100,
+      marginRight: 'auto',
+      marginLeft: 'auto',
+    },
+    btn: {
+      marginRight: 'auto',
+      marginLeft: 'auto',
+      marginBottom: '20px',
+      marginTop: '20px',
+      textTransform: 'capitalize',
+    }
   });
 
-const Items = () => {
+const Items = ({ data }) => {
     const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
+    
+    const pokeCard = (item) => {
+      const pokeId = item[0]
+      console.log(item)
+      const imgLink = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeId}.png`
+      
+      return (
+        <Box mt={2}>
+          <Card className={classes.root}>
+              <CardActionArea>
+                <CardContent>
+                    <CardMedia
+                      className={classes.media}
+                      image={imgLink}
+                      title="Contemplative Reptile"
+                    />
+                    <Typography style={{textTransform: 'capitalize'}} variant="h5" component="h2">
+                    {item[1].name}
+                    </Typography>
+                    <Typography style={{overflowWrap: 'anywhere'}} variant="body2" component="p">
+                    {item[1].sprites.front_default}
+                    </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions>
+                  <Button variant='contained' color='primary' size="small" className={classes.btn}>{item[1].name} Page</Button>
+              </CardActions>
+          </Card>
+        </Box>
+      )
+    }
 
     return (
         <Container maxWidth="lg">
             <Grid container spacing={2}>
-                <Grid item xs={12} sm={4}>
-                    <Box mt={2}>
-                    <Card className={classes.root}>
-                        <CardContent>
-                            <Typography className={classes.title} color="textSecondary" gutterBottom>
-                            Word of the Day
-                            </Typography>
-                            <Typography variant="h5" component="h2">
-                            be{bull}nev{bull}o{bull}lent
-                            </Typography>
-                            <Typography className={classes.pos} color="textSecondary">
-                            adjective
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                            well meaning and kindly.
-                            <br />
-                            {'"a benevolent smile"'}
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Button size="small">Learn More</Button>
-                        </CardActions>
-                    </Card>
-                    </Box>
+              {Object.entries(data).map(item =>
+                <Grid key={item[0]} item xs={12} sm={3}>
+                    {pokeCard(item)}
                 </Grid>
+              )}
             </Grid>
         </Container>
     )
