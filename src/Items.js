@@ -47,7 +47,7 @@ const Items = ({ data, otherData }) => {
     const { history } = otherData
     
     const pokeCard = (item) => {
-      const pokeId = item[0]
+      const pokeId = item[1].id
       const imgLink = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeId}.png`
       console.log(item)
 
@@ -65,7 +65,7 @@ const Items = ({ data, otherData }) => {
                     {item[1].name}
                     </Typography>
                     <Typography style={{overflowWrap: 'anywhere'}} variant="body2" component="p">
-                    {item[1].sprites.front_default}
+                    {item[1].sprite}
                     </Typography>
                 </CardContent>
               </CardActionArea>
@@ -81,7 +81,7 @@ const Items = ({ data, otherData }) => {
         <Container maxWidth="lg">
             <Grid container spacing={2}>
               {Object.entries(data).map(item =>
-                <Grid key={item[0]} item xs={12} sm={6} lg={3}>
+                <Grid key={item[1].id} item xs={12} sm={6} lg={3}>
                     {pokeCard(item)}
                 </Grid>
               )}
