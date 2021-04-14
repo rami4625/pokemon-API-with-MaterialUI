@@ -4,13 +4,13 @@ import Items from './Items'
 import mockData from './mockData'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-const Pokedex = () => {
+const Pokedex = (props) => {
     const [pokeData, setPokeData] = useState(mockData)
 
     return (
         <div>
             <MyAppBar />
-            {pokeData ? <Items data={pokeData} /> : <CircularProgress />}
+            {pokeData ? <Items data={pokeData} otherData={props} /> : <CircularProgress />}
         </div>
     )
 }

@@ -42,16 +42,17 @@ const useStyles = makeStyles({
     }
   });
 
-const Items = ({ data }) => {
+const Items = ({ data, otherData }) => {
     const classes = useStyles();
+    const { history } = otherData
     
     const pokeCard = (item) => {
       const pokeId = item[0]
-      console.log(item)
       const imgLink = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeId}.png`
-      
+      console.log(item)
+
       return (
-        <Box mt={2}>
+        <Box mt={2} onClick={() => history.push(`/${pokeId}`)}>
           <Card className={classes.root}>
               <CardActionArea>
                 <CardContent>
@@ -80,7 +81,7 @@ const Items = ({ data }) => {
         <Container maxWidth="lg">
             <Grid container spacing={2}>
               {Object.entries(data).map(item =>
-                <Grid key={item[0]} item xs={12} sm={3}>
+                <Grid key={item[0]} item xs={12} sm={6} lg={3}>
                     {pokeCard(item)}
                 </Grid>
               )}
