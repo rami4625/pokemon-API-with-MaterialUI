@@ -21,7 +21,6 @@ const Pokedex = (props) => {
                         sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
                     }
                 })
-                console.log(newPokemonData)
                 setPokeData(newPokemonData)
             })
     }, [])

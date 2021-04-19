@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { contextProvider }  from './PageContextProvider'
+import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -16,23 +17,28 @@ const useStyles = makeStyles({
       minWidth: 275,
       textAlign: 'center'
     },
+
     bullet: {
       display: 'inline-block',
       margin: '0 2px',
       transform: 'scale(0.8)',
     },
+
     title: {
       fontSize: 14,
     },
+
     pos: {
       marginBottom: 12,
     },
+
     media: {
       height: 100,
       width: 100,
       marginRight: 'auto',
       marginLeft: 'auto',
     },
+
     btn: {
       marginRight: 'auto',
       marginLeft: 'auto',
@@ -45,11 +51,11 @@ const useStyles = makeStyles({
 const Items = ({ data, otherData }) => {
     const classes = useStyles();
     const { history } = otherData
+    const [searchData, setSearchData] = useContext(contextProvider)
     
     const pokeCard = (item) => {
       const pokeId = item[1].id
       const imgLink = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeId}.png`
-      console.log(item)
 
       return (
         <Box mt={2} onClick={() => history.push(`/${pokeId}`)}>
@@ -81,6 +87,7 @@ const Items = ({ data, otherData }) => {
         <Container maxWidth="lg">
             <Grid container spacing={2}>
               {Object.entries(data).map(item =>
+              item[1].name.includes(searchData) &&
                 <Grid key={item[1].id} item xs={12} sm={6} lg={3}>
                     {pokeCard(item)}
                 </Grid>
