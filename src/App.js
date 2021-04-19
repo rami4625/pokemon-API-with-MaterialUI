@@ -17,8 +17,13 @@ function App() {
             />
 
             <Route
-              path='/:pokemonId'
+              exact path='/:pokemonId'
               render={(props) => <Pokemon {...props} />}
+            />
+
+            <Route
+              exact path='/:test'
+              render={(props) => `${console.log(props.match)} <h1>test</h1>`}
             />
           </div>
         </>

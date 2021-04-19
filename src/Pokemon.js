@@ -53,6 +53,7 @@ const Pokemon = (props) => {
     const { params } = match
     const { pokemonId } = params
     const [pokemon, setPokemon] = useState()
+    console.log(match)
 
     useEffect(() => {
       axios
