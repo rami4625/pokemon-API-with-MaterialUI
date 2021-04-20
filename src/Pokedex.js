@@ -2,18 +2,19 @@ import React, { useState, useEffect } from 'react'
 import MyAppBar from './MyAppBar'
 import Items from './Items'
 import CircularProgress from '@material-ui/core/CircularProgress';
-import axios from 'axios';
 
 const Pokedex = (props) => {
     const [pokeData, setPokeData] = useState({})
 
     useEffect(() => {
-        axios
-            .get(`https://pokeapi.co/api/v2/pokemon?limit=28`)
-            .then(function (response) {
-                const { data } = response
+        const getPokemon = async () => {
+            try {
+                const response = await fetch ("https://pokeapi.co/api/v2/pokemon?limit=28")
+                const data = await response.json()
                 const { results } = data
                 const newPokemonData = {}
+                console.log(results)
+
                 results.forEach((pokemon, index) => {
                     newPokemonData[index + 1] = {
                         id: index + 1,
@@ -21,8 +22,16 @@ const Pokedex = (props) => {
                         sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
                     }
                 })
+
                 setPokeData(newPokemonData)
-            })
+            }
+
+            catch(e) {
+                console.log("Error: ", e.message)
+            }
+        }
+        getPokemon();
+        
     }, [])
 
     return (

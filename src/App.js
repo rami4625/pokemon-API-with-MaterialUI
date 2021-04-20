@@ -9,24 +9,22 @@ function App() {
   return (
     <PageContextProvider>
       <Router history={createBrowserHistory()}>
-        <>
-          <div className="App">
-            <Route
-              exact path='/'
-              render={(props) => <Pokedex {...props} />}
-            />
+        <div className="App">
+          <Route
+            exact path='/'
+            render={(props) => <Pokedex {...props} />}
+          />
 
-            <Route
-              exact path='/:pokemonId'
-              render={(props) => <Pokemon {...props} />}
-            />
+          <Route
+            exact path='/:pokemonId'
+            render={(props) => <Pokemon {...props} />}
+          />
 
-            <Route
-              exact path='/:test'
-              render={(props) => `${console.log(props.match)} <h1>test</h1>`}
-            />
-          </div>
-        </>
+          <Route
+            exact path='/:test'
+            render={(props) => `${console.log(props.match)} <h1>test</h1>`}
+          />
+        </div>
       </Router>
     </PageContextProvider>
   );

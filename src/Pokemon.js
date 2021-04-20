@@ -12,7 +12,6 @@ import MyAppBar from './MyAppBar'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 import ArrowBack from '@material-ui/icons/ArrowBack'
-import axios from 'axios';
 
 const useStyles = makeStyles({
     root: {
@@ -56,15 +55,20 @@ const Pokemon = (props) => {
     console.log(match)
 
     useEffect(() => {
-      axios
-        .get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
-        .then(function (response) {
-          const { data } = response
-          setPokemon(data)
-        })
-        .catch(function (error) {
-          setPokemon(false)
-        })
+        const getPokemon = async () => {
+            try {
+                const response = await fetch (`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
+                const data = await response.json()
+                setPokemon(data)
+            }
+
+            catch(e) {
+              setPokemon(false)
+              console.log("Error: ", e.message)
+            }
+        }
+        getPokemon();
+
     }, [pokemonId])
 
     const pokeItem = (pokemon) => {
