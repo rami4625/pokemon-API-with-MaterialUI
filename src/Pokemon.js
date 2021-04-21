@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useParams, useHistory } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -48,11 +49,9 @@ const useStyles = makeStyles({
 
 const Pokemon = (props) => {
     const classes = useStyles()
-    const { history, match } = props
-    const { params } = match
-    const { pokemonId } = params
+    const history = useHistory()
+    const { pokemonId } = useParams()
     const [pokemon, setPokemon] = useState()
-    console.log(match)
 
     useEffect(() => {
         const getPokemon = async () => {

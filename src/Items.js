@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { useHistory } from 'react-router-dom';
 import { contextProvider }  from './PageContextProvider'
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -48,9 +49,9 @@ const useStyles = makeStyles({
     }
   });
 
-const Items = ({ data, otherData }) => {
+const Items = ({ data }) => {
     const classes = useStyles();
-    const { history } = otherData
+    const history = useHistory()
     const [searchData, setSearchData] = useContext(contextProvider)
     
     const pokeCard = (item) => {

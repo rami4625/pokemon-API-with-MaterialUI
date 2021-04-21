@@ -5,7 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 const Pokedex = (props) => {
     const [pokeData, setPokeData] = useState({})
-
+    
     useEffect(() => {
         const getPokemon = async () => {
             try {
@@ -13,7 +13,6 @@ const Pokedex = (props) => {
                 const data = await response.json()
                 const { results } = data
                 const newPokemonData = {}
-                console.log(results)
 
                 results.forEach((pokemon, index) => {
                     newPokemonData[index + 1] = {
@@ -37,7 +36,7 @@ const Pokedex = (props) => {
     return (
         <div>
             <MyAppBar />
-            {pokeData ? <Items data={pokeData} otherData={props} /> : <CircularProgress />}
+            {pokeData ? <Items data={pokeData} /> : <CircularProgress />}
         </div>
     )
 }
