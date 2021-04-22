@@ -11,6 +11,7 @@ import { useLocation } from 'react-router-dom'
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
+      marginBottom: '80px'
     },
 
     menuButton: {
@@ -72,7 +73,7 @@ const MyAppBar = () => {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="fixed">
                 <Toolbar>
                 <Typography className={classes.title} variant="h6" noWrap>
                     Material-UI
